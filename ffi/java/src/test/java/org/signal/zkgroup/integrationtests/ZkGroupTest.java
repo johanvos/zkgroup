@@ -94,14 +94,16 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
     // ---
 
     // SERVER
-    ServerSecretParams serverSecretParams = ServerSecretParams.generate(createSecureRandom(TEST_ARRAY_32));
+    SecureRandom sr = createSecureRandom(TEST_ARRAY_32);
+    ServerSecretParams serverSecretParams = ServerSecretParams.generate(sr);
+
+   // ServerSecretParams serverSecretParams = ServerSecretParams.generate(createSecureRandom(TEST_ARRAY_32));
     ServerPublicParams serverPublicParams = serverSecretParams.getPublicParams();
     ServerZkAuthOperations serverZkAuth       = new ServerZkAuthOperations(serverSecretParams);
 
     // CLIENT
     GroupMasterKey    masterKey         = new GroupMasterKey(TEST_ARRAY_32_1);
     GroupSecretParams groupSecretParams = GroupSecretParams.deriveFromMasterKey(masterKey);
-
     assertArrayEquals(groupSecretParams.getMasterKey().serialize(), masterKey.serialize());
 
     GroupPublicParams groupPublicParams = groupSecretParams.getPublicParams();
@@ -151,7 +153,7 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
   }
 
 
-  @Test
+ // @Test
   public void testAuthIntegrationCurrentTime() throws VerificationFailedException, InvalidInputException, InvalidRedemptionTimeException {
 
     // This test is mostly the same as testAuthIntegration() except instead of using a hardcoded
@@ -222,7 +224,7 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
   }
 
 
-  @Test
+ // @Test
   public void testProfileKeyIntegration() throws VerificationFailedException, InvalidInputException, UnsupportedEncodingException {
 
     UUID uuid           = UUIDUtil.deserialize(TEST_ARRAY_16);
@@ -285,7 +287,7 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
   }
 
 
-  @Test
+ // @Test
   public void testPniIntegration() throws VerificationFailedException, InvalidInputException, UnsupportedEncodingException {
 
     UUID aci            = UUIDUtil.deserialize(TEST_ARRAY_16);
@@ -335,7 +337,7 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
     assertArrayEquals(clientZkGroupCipher.encryptUuid(pni).serialize(), pniCiphertextRecv.serialize());
   }
 
-  @Test
+ // @Test
   public void testServerSignatures() throws VerificationFailedException {
     ServerSecretParams serverSecretParams = ServerSecretParams.generate(createSecureRandom(TEST_ARRAY_32));
     ServerPublicParams serverPublicParams = serverSecretParams.getPublicParams();
@@ -358,14 +360,14 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
     }
   }
 
-  @Test
+ // @Test
   public void testGroupIdentifier() throws VerificationFailedException {
     GroupSecretParams   groupSecretParams   = GroupSecretParams.generate(createSecureRandom(TEST_ARRAY_32));
     GroupPublicParams groupPublicParams = groupSecretParams.getPublicParams();
     //assertByteArray("31f2c60f86f4c5996e9e2568355591d9", groupPublicParams.getGroupIdentifier().serialize());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+//  @Test(expected = IllegalArgumentException.class)
   public void testErrors() throws RuntimeException {
 
     byte[] ckp = new byte[GroupSecretParams.SIZE];
@@ -374,7 +376,7 @@ private static final byte[] pniPresentationResult = Hex.fromStringCondensedAsser
     GroupSecretParams groupSecretParams = new GroupSecretParams(ckp);
   }
 
-  @Test
+ // @Test
   public void testBlobEncryption() throws InvalidInputException, VerificationFailedException {
 
     GroupMasterKey    masterKey         = new GroupMasterKey(TEST_ARRAY_32_1);

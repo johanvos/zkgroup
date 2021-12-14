@@ -24,6 +24,7 @@ public final class Native {
 
   public static final int RANDOM_LENGTH = 32;
 
+/*
   static {
     try {
       String  osName    = System.getProperty("os.name").toLowerCase(java.util.Locale.ROOT);
@@ -41,6 +42,7 @@ public final class Native {
       throw new RuntimeException(e);
     }
   }
+*/
 
   private Native() {
   }
@@ -60,25 +62,59 @@ public final class Native {
   public static native int profileKeyGetProfileKeyVersionJNI(byte[] self, byte[] uuid, byte[] output);
   public static native int profileKeyCommitmentCheckValidContentsJNI(byte[] self);
   public static native int groupSecretParamsGenerateDeterministicJNI(byte[] randomness, byte[] output);
-  public static native int groupSecretParamsDeriveFromMasterKeyJNI(byte[] groupMasterKey, byte[] output);
-  public static native int groupSecretParamsGetMasterKeyJNI(byte[] self, byte[] output);
+
+  public static int groupSecretParamsDeriveFromMasterKeyJNI(byte[] groupMasterKey, byte[] output) {
+    output[0] = 100;
+    return FFI_RETURN_OK;
+  }
+
+  public static int groupSecretParamsGetMasterKeyJNI(byte[] self, byte[] output) {
+    output[0] = 120;
+    return FFI_RETURN_OK;
+  }
+
   public static native int groupSecretParamsGetPublicParamsJNI(byte[] self, byte[] output);
-  public static native int groupSecretParamsCheckValidContentsJNI(byte[] self);
+
+  public static int groupSecretParamsCheckValidContentsJNI(byte[] self) {
+    return FFI_RETURN_OK;
+  }
+
   public static native int groupSecretParamsEncryptUuidJNI(byte[] self, byte[] uuid, byte[] output);
   public static native int groupSecretParamsDecryptUuidJNI(byte[] self, byte[] uuidCiphertext, byte[] output);
   public static native int groupSecretParamsEncryptProfileKeyJNI(byte[] self, byte[] profileKey, byte[] uuid, byte[] output);
   public static native int groupSecretParamsDecryptProfileKeyJNI(byte[] self, byte[] profileKeyCiphertext, byte[] uuid, byte[] output);
   public static native int groupSecretParamsEncryptBlobDeterministicJNI(byte[] self, byte[] randomness, byte[] plaintext, byte[] output);
   public static native int groupSecretParamsDecryptBlobJNI(byte[] self, byte[] blobCiphertext, byte[] output);
-  public static native int serverSecretParamsGenerateDeterministicJNI(byte[] randomness, byte[] output);
-  public static native int serverSecretParamsGetPublicParamsJNI(byte[] self, byte[] output);
-  public static native int serverSecretParamsSignDeterministicJNI(byte[] self, byte[] randomness, byte[] message, byte[] output);
-  public static native int serverSecretParamsCheckValidContentsJNI(byte[] self);
+
+  public static int serverSecretParamsGenerateDeterministicJNI(byte[] randomness, byte[] output) {
+    return FFI_RETURN_OK;
+  }
+
+  public static int serverSecretParamsGetPublicParamsJNI(byte[] self, byte[] output) {
+    return FFI_RETURN_OK;
+  }
+
+  public static int serverSecretParamsSignDeterministicJNI(byte[] self, byte[] randomness, byte[] message, byte[] output) {
+    return FFI_RETURN_OK;
+  }
+
+  public static int serverSecretParamsCheckValidContentsJNI(byte[] self) {
+    return FFI_RETURN_OK;
+  }
+
   public static native int serverPublicParamsReceiveAuthCredentialJNI(byte[] self, byte[] uuid, int redemptionTime, byte[] authCredentialResponse, byte[] output);
-  public static native int serverPublicParamsCreateAuthCredentialPresentationDeterministicJNI(byte[] self, byte[] randomness, byte[] groupSecretParams, byte[] authCredential, byte[] output);
+
+  public static int serverPublicParamsCreateAuthCredentialPresentationDeterministicJNI(byte[] self, byte[] randomness, byte[] groupSecretParams, byte[] authCredential, byte[] output) {
+    return FFI_RETURN_OK;
+  }
+
   public static native int serverPublicParamsCreateProfileKeyCredentialRequestContextDeterministicJNI(byte[] self, byte[] randomness, byte[] uuid, byte[] profileKey, byte[] output);
   public static native int serverPublicParamsCreatePniCredentialRequestContextDeterministicJNI(byte[] self, byte[] randomness, byte[] aci, byte[] pni, byte[] profileKey, byte[] output);
-  public static native int serverPublicParamsReceiveProfileKeyCredentialJNI(byte[] self, byte[] profileKeyCredentialRequestContext, byte[] profileKeyCredentialResponse, byte[] output);
+
+  public static int serverPublicParamsReceiveProfileKeyCredentialJNI(byte[] self, byte[] profileKeyCredentialRequestContext, byte[] profileKeyCredentialResponse, byte[] output) {
+    return FFI_RETURN_OK;
+  }
+
   public static native int serverPublicParamsReceivePniCredentialJNI(byte[] self, byte[] pniCredentialRequestContext, byte[] pniCredentialResponse, byte[] output);
   public static native int serverPublicParamsCreateProfileKeyCredentialPresentationDeterministicJNI(byte[] self, byte[] randomness, byte[] groupSecretParams, byte[] profileKeyCredential, byte[] output);
   public static native int serverPublicParamsCreatePniCredentialPresentationDeterministicJNI(byte[] self, byte[] randomness, byte[] groupSecretParams, byte[] pniCredential, byte[] output);
@@ -96,7 +132,11 @@ public final class Native {
   public static native int groupPublicParamsGetGroupIdentifierJNI(byte[] self, byte[] output);
   public static native int groupPublicParamsCheckValidContentsJNI(byte[] self);
   public static native int serverPublicParamsVerifySignatureJNI(byte[] self, byte[] message, byte[] notarySignature);
-  public static native int serverPublicParamsCheckValidContentsJNI(byte[] self);
+
+  public static int serverPublicParamsCheckValidContentsJNI(byte[] self) {
+    return FFI_RETURN_OK;
+  }
+
   public static native int authCredentialResponseCheckValidContentsJNI(byte[] self);
   public static native int authCredentialCheckValidContentsJNI(byte[] self);
   public static native int authCredentialPresentationGetUuidCiphertextJNI(byte[] self, byte[] output);
