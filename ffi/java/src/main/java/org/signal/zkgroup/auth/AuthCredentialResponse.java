@@ -20,6 +20,7 @@ public final class AuthCredentialResponse extends ByteArray {
 
   public AuthCredentialResponse(byte[] contents) throws InvalidInputException {
     super(contents, SIZE);
+/*
     
     int ffi_return = Native.authCredentialResponseCheckValidContentsJNI(contents);
 
@@ -30,6 +31,7 @@ public final class AuthCredentialResponse extends ByteArray {
     if (ffi_return != Native.FFI_RETURN_OK) {
       throw new ZkGroupError("FFI_RETURN!=OK");
     }
+*/
   }
 
   public byte[] serialize() {

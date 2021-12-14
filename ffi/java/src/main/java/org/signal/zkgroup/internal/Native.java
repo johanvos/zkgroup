@@ -26,6 +26,8 @@ public final class Native {
 
   static {
     try {
+System.err.println("[JVDBG] ZKGROUP, no native lib");
+/*
       String  osName    = System.getProperty("os.name").toLowerCase(java.util.Locale.ROOT);
       boolean isMacOs   = osName.startsWith("mac os x");
       String  extension = isMacOs ? ".dylib" : ".so";
@@ -37,6 +39,7 @@ public final class Native {
           System.loadLibrary("zkgroup");
         }
       }
+*/
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

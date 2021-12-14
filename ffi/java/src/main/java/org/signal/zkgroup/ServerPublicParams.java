@@ -18,7 +18,7 @@ public final class ServerPublicParams extends ByteArray {
 
   public ServerPublicParams(byte[] contents)  {
     super(contents, SIZE, true);
-    
+    /*
     int ffi_return = Native.serverPublicParamsCheckValidContentsJNI(contents);
 
     if (ffi_return == Native.FFI_RETURN_INPUT_ERROR) {
@@ -28,6 +28,7 @@ public final class ServerPublicParams extends ByteArray {
     if (ffi_return != Native.FFI_RETURN_OK) {
       throw new ZkGroupError("FFI_RETURN!=OK");
     }
+*/
   }
 
   public void verifySignature(byte[] message, NotarySignature notarySignature) throws VerificationFailedException {
