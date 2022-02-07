@@ -27,13 +27,17 @@ public final class Native {
   static {
     try {
       String  osName    = System.getProperty("os.name").toLowerCase(java.util.Locale.ROOT);
+System.err.println("NATIVE: osName = " + osName);
       boolean isMacOs   = osName.startsWith("mac os x");
-      String  extension = isMacOs ? ".dylib" : ".so";
+      boolean isWin   = osName.startsWith("win");
+      String  extension = isMacOs ? ".dylib" : isWin ? ".dll" : ".so";
 
       try (InputStream in = Native.class.getResourceAsStream("/libzkgroup" + extension)) {
         if (in != null) {
+System.err.println("got lib!");
           copyToTempFileAndLoad(in, extension);
         } else {
+System.err.println("didn't get lib!");
           System.loadLibrary("zkgroup");
         }
       }
