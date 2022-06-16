@@ -37,6 +37,11 @@ mac_dylib:
 	mkdir -p ffi/java/src/main/resources/
 	cp target/x86_64-apple-darwin/release/libzkgroup.dylib ffi/java/src/main/resources/
 
+mac_dylib_m1:
+	RUSTFLAGS='-C link-arg=-s' cargo +stable build --release
+	cp target/release/libzkgroup.dylib ffi/java/libs/aarch64
+	lipo -create ffi/java/libs/aarch64/libzkgroup.dylib ffi/java/libs/x86_64/libzkgroup.dylib -output ffi/java/src/main/resources/libzkgroup.dylib
+
 libzkgroup:
 	RUSTFLAGS='-C link-arg=-s' cargo build --release
 
