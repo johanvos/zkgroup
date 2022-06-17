@@ -4,7 +4,7 @@
 
     <groupId>org.signal</groupId>
     <artifactId>zkgroup-java</artifactId>
-    <version>0.8.2-gluon-7</version>
+    <version>0.8.2-gluon-8</version>
     <packaging>jar</packaging>
 
     <name>zkgroup</name>
